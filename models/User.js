@@ -1,11 +1,11 @@
-const mongoose = require('module');
+const mongoose = require('mongoose');
 
 const UserSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true
   },
-  emali: {
+  email: {
     type: String,
     required: true,
     unique: true
