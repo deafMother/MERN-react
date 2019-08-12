@@ -1,4 +1,6 @@
 {
   "mongoURI": "mongodb+srv://sarovar:sarovar123@merncluster-yld3g.mongodb.net/test?retryWrites=true&w=majority",
-  "jwtSecret": "sercetToken"
+  "jwtSecret": "sercetToken",
+  "githubClientId": " Iv1.f7588538d80551d9",
+  "githubSecret": "3431d2a3d267050d9235c361edff5418a87a1e0a"
 }
