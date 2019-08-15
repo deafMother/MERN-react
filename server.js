@@ -19,7 +19,7 @@ app.use('/api/auth', require('./routes/api/auth'));
 app.use('/api/profile', require('./routes/api/profile'));
 app.use('/api/posts', require('./routes/api/posts'));
 
-// set the port number
+// set the port numb
 const PORT = process.env.PORT || 5000;
 
 // listen to the port
