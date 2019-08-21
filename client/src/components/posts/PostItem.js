@@ -4,55 +4,68 @@ import Moment from 'react-moment';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { addLike, removeLike, deletePost } from '../../actions/post';
-
+/* 'problem with delete post, addLike and removeLike not updating correctly' */
 const PostItem = ({
   addLike,
   removeLike,
   deletePost,
   auth,
-  post: { _id, text, name, avatar, user, like, comments, date }
+  post: { _id, text, name, avatar, user, like, comments, date },
+  showActions
 }) => {
   return (
     <div class='post bg-white p-1 my-1'>
       <div>
-        <a href='profile.html'>
+        <Link to={`/profiles/${user}`}>
           <img class='round-img' src={avatar} alt='' />
           <h4>{name}</h4>
-        </a>
+        </Link>
       </div>
       <div>
         <p class='my-1'>{text}</p>
         <p class='post-date'>
           Posted on <Moment format='YYYY/MM/DD'>{date}</Moment>
         </p>
-        <button type='button' class='btn btn-light' onClick={e => addLike(_id)}>
-          <i class='fas fa-thumbs-up' />
-          <span> {like.length}</span>
-        </button>
-        <button
-          type='button'
-          class='btn btn-light'
-          onClick={e => removeLike(_id)}
-        >
-          <i class='fas fa-thumbs-down' />
-        </button>
+        {showActions && (
+          <Fragment>
+            <button
+              type='button'
+              class='btn btn-light'
+              onClick={e => addLike(_id)}
+            >
+              <i class='fas fa-thumbs-up' />
+              <span> {like.length}</span>
+            </button>
+            <button
+              type='button'
+              class='btn btn-light'
+              onClick={e => removeLike(_id)}
+            >
+              <i class='fas fa-thumbs-down' />
+            </button>
 
-        <Link to={`/post/${_id}`} class='btn btn-primary'>
-          Discussion <span class='comment-count'> {comments.length}</span>
-        </Link>
+            <Link to={`/posts/${_id}`} class='btn btn-primary'>
+              Discussion <span class='comment-count'> {comments.length}</span>
+            </Link>
 
-        {!auth.loading && user === auth.user._id && (
-          <button
-            type='button'
-            class='btn btn-danger'
-            // onClick={e => deletePost(_id)}
-          >
-            <i class='fas fa-times' />
-          </button>
+            {!auth.loading && user === auth.user._id && (
+              <button
+                type='button'
+                class='btn btn-danger'
+                // onClick={e => deletePost(_id)}
+              >
+                <i class='fas fa-times' />
+              </button>
+            )}
+          </Fragment>
         )}
       </div>
     </div>
   );
+};
+
+PostItem.defaultProps = {
+  showActions: true
 };
 
 PostItem.propTypes = {
